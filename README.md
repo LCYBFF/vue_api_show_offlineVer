@@ -16,6 +16,10 @@ Vue-Cli4+Vue Router+Element-UI开发，用于API接口展示（线下版本，�
 
 2、接口使用Basic Auth用户验证方法
 
+## 截图
+
+ ![](https://raw.githubusercontent.com/LCYBFF/screenshot/master/vue_api_show_offlineVer/1.JPG) 
+
 
 ## Build Setup
 
