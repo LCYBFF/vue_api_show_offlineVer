@@ -2,9 +2,12 @@
   <div>
     <el-container>
       <el-row>
-        <el-col :span="12" style="float: none;margin: 0 auto;">
+        <el-col
+          :span="12"
+          style="float: none;margin: 0 auto;"
+          id="Body">
           <Navbar />
-          <el-main>
+          <el-main id="mainBody">
             <app-main />
           </el-main>
         </el-col>
@@ -30,6 +33,13 @@
 </script>
 
 <style>
+  body > .el-container {
+    margin-bottom: 40px;
+  }
+  a {
+    text-decoration: none;
+  }
+
   .el-header, .el-footer {
     background-color: #B3C0D1;
     color: #333;
@@ -41,11 +51,14 @@
     color: #333;
     overflow: hidden;
   }
-  
-  body > .el-container {
-    margin-bottom: 40px;
+
+  #mainBody {
+    padding-top: 5rem;
   }
-  a {
-    text-decoration: none;
+  
+  @media screen and (max-width: 1440px) {
+    #Body{
+        width: 100%;
+    }
   }
 </style>

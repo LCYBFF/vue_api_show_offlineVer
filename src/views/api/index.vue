@@ -2,12 +2,12 @@
   <div>
     <div class="api-mains-content">
       <el-row :gutter="20">
-        <el-col :span="8">
+        <el-col :span="imgCol" :offset="offset">
           <div class="api-img-des">
             <i :class="'el-icon-' + Datalist.icon"></i>
           </div>
         </el-col>
-        <el-col :span="16">
+        <el-col :span="infoCol">
           <div class="api-infos">
             <div class="title">
               <h2>{{ Datalist.title }}</h2>
@@ -96,10 +96,14 @@
     data() {
       return {
         activeName: 'first',
+        imgCol: 8,
+        infoCol: 16,
+        offset: 0,
         Datalist: [],
         Codelist: [],
         DatalistLoading: true,
-        CodelistLoading: true
+        CodelistLoading: true,
+        clientWidth: document.body.clientWidth
       };
     },
     components: {
@@ -108,6 +112,20 @@
     created() {
       this.getData()
       this.getErrorCode()
+      this.changeWidth(this.clientWidth)
+    },
+    mounted() {
+      // 监听页面宽度
+      window.onresize = () => {
+        return (() => {
+          this.clientWidth = document.body.clientWidth
+        })()
+      }
+    },
+    watch: {
+      clientWidth: function(val) {
+        this.changeWidth(val)
+      }
     },
     methods: {
       getData() {
@@ -122,12 +140,24 @@
           this.Codelist = response.data
           this.CodelistLoading = false
         })
+      },
+      changeWidth(val) {
+        if (val <= 425) {
+          this.imgCol = 20
+          this.infoCol = 24
+          this.offset = 2
+        } else {
+          this.imgCol = 8
+          this.infoCol = 16
+          this.offset = 0
+        }
       }
     }
   };
 </script>
 
 <style>
+
   .api-img-des {
     position: relative;
     left: 0;
@@ -140,10 +170,18 @@
     background: #fff;
     box-shadow: 0 0 10px 0 rgba(36,36,36,0.1);
   }
+
   .api-img-des i {
     padding-top: 50px;
     transition: .5s;
     font-size: 90px;
     color: rgb(121, 187, 255);
+  }
+  
+  @media screen and (max-width: 768px) {
+    .api-img-des{
+      width: auto;
+      text-align: center;
+    }
   }
 </style>
